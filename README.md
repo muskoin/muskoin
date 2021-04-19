@@ -42,6 +42,7 @@ Currently new_muskoin does not have a working interface, it is just cosmetic.
 Access localhost:3000/#/Web3 (in new_muskoin/muskoin/src/pages) in order to see how to interface with the blockchain.
 
 Rinkeby Address: `0xc21764e1E1216D1D12FFdfCf1eC2a3BC258b4162`
+
 MINTER_ROLE account: `0xC6Fa0615877c6A5d14019C1BadaDa5aABD78b314`
 
 ## Development
