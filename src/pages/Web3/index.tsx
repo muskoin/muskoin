@@ -14,7 +14,7 @@ export default function Web3() {
     }
   }
 
-  updateProvider()
+  window.ethereum ? updateProvider() : console.log("No provider")
 
   return (
     <div className="App">
