@@ -84,6 +84,7 @@ npx hardhat test
 ```
 
 ## TODO
-- Lazy minting
+- fix favicon in dApp
 - Github Pages
 - Assets for user orientation
+- Lazy minting
