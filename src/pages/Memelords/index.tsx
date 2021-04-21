@@ -115,7 +115,7 @@ export default function Memelords() {
     }
   }
 
-  updateProvider()
+  window.ethereum ? updateProvider() : console.log("No window.ethereum")
 
   const updateTokenDeployed = async () => {
     let network = Object.keys(provider).length > 0 ? await provider.getNetwork() : console.log(provider)

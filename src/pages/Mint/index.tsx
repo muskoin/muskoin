@@ -29,7 +29,7 @@ export default function Mint() {
     }
   }
 
-  updateProvider()
+  window.ethereum ? updateProvider() : console.log("No window.ethereum")
   
   // State setup
   const [tokenName, setTokenName] = useState("")
