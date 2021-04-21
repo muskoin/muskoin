@@ -4,7 +4,7 @@
 
 # Muskoin
 
-An open source interface and protocol for bestowing eternal glory to authors of dank memes. 
+An ultra-minimal, open source interface and protocol for bestowing eternal glory to authors of dank memes. 
 
 ## Motivation
 
@@ -84,7 +84,6 @@ npx hardhat test
 ```
 
 ## TODO
-- fix favicon in dApp
 - Github Pages
 - Assets for user orientation
 - Lazy minting
