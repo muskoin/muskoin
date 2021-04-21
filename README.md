@@ -22,8 +22,9 @@ Blockchain technology has ushered in a new paradigm of digital ownership. Platfo
 to execute arbitrary computational logic over a decentralized network of computers in a 
 [trustless](https://www.nananke.com/single-post/2018/08/07/zero-trust-vs-trustless-systems) fashion through the use of 
 [smart contracts](https://en.wikipedia.org/wiki/Smart_contract). By leveraging smart contracts, it is now possible to create 
-[non-fungible](https://www.investopedia.com/terms/f/fungibility.asp) digital assets and assign irrefutable ownership of such assets. To this end, the Muskoin protocol is 
-designed to facilitate a non-fungible digital representation of the ownership of a meme and at the same time documenting its first appearance.
+[non-fungible](https://www.investopedia.com/terms/f/fungibility.asp) digital assets and assign irrefutable ownership of such assets. To this end, the 
+[Muskoin protocol](https://muskoin.app) is designed to facilitate a non-fungible digital representation of the ownership of a meme and at the same 
+time documenting its first appearance.
 
 This work is dedicated to the memory of our friend, Harambe. 
 
