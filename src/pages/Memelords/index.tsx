@@ -71,8 +71,8 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-function createData(address: string, url: string) {
-  return { address, url };
+function createData(index: number, address: string, url: string) {
+  return { index, address, url };
 }
 
 function formatString(str : string, max : number) {
@@ -89,7 +89,7 @@ function formatString(str : string, max : number) {
 }
 
 const initRows = [
-  createData('', '')
+  createData(-1, '', '')
 ]  
 
 export default function Memelords() {
@@ -105,7 +105,7 @@ export default function Memelords() {
 
   // create the muskoin interface
   const muskoin =  Object.keys(provider).length > 0 ? new ethers.Contract(MUSKOIN_ADDRESS, MUSKOIN_INTERFACE.abi, provider) : null
-  
+  var rows_mutex = false // false == unlocked
   // chain logic
   const newProvider = window.ethereum ? new ethers.providers.Web3Provider(window.ethereum!) : {}
 
@@ -143,8 +143,7 @@ export default function Memelords() {
   const updatePeriod = 500 //milliseconds
   const updateFunction = () => {
     if(Object.keys(provider).length > 0) {
-      updateTokenDeployed()
-      updateQuantityNFT()
+      tokenDeployed ? updateQuantityNFT() : updateTokenDeployed()
     }  
   }
 
@@ -158,15 +157,19 @@ export default function Memelords() {
   // Update the rows if the number of NFTs changed
   useEffect(() => {
     async function localAsyncFunction() { // This local async function is needed for the useEffect handle
-      var tempRows = []
-      for (let i = 0; i < parseInt(quantityNFT); i++) {
-        let row_token = muskoin ? await muskoin.tokenByIndex(i) : ""
-        let row_address = muskoin && row_token ? await muskoin.ownerOf(row_token) : ""
-        let row_uri = muskoin && row_token ? await muskoin.tokenURI(row_token) : ""
-        tempRows.push(createData(row_address, row_uri))
+      if(!rows_mutex) {
+        rows_mutex = true
+        var tempRows = []
+        for (let i = 0; i < parseInt(quantityNFT); i++) {
+          let row_token = muskoin ? await muskoin.tokenByIndex(i) : ""
+          let row_address = muskoin && row_token ? await muskoin.ownerOf(row_token) : ""
+          let row_uri = muskoin && row_token ? await muskoin.tokenURI(row_token) : ""
+          tempRows.push(createData(i,row_address, row_uri))
+        }
+        setRows(tempRows)
+        rows_mutex = false
       }
-      setRows(tempRows)
-      }
+    }
     // Execute the created function directly
     localAsyncFunction();
   }, [quantityNFT])
@@ -215,6 +218,7 @@ export default function Memelords() {
 
             <TableHead style={{color: colors(darkMode).text1, borderColor: colors(darkMode).text5 }}>
               <TableRow style={{color: colors(darkMode).text1, borderColor: colors(darkMode).text5 }}>
+                <TableCell style={{color: colors(darkMode).text1, borderColor: colors(darkMode).text5 }} align="left">#</TableCell>
                 <TableCell style={{color: colors(darkMode).text1, borderColor: colors(darkMode).text5 }}>Address</TableCell>
                 <TableCell style={{color: colors(darkMode).text1, borderColor: colors(darkMode).text5 }} align="right">Award URL</TableCell>
               </TableRow>
@@ -225,7 +229,10 @@ export default function Memelords() {
                 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : rows
               ).map((row) => (
-                <TableRow key={row.address} style={{borderColor: colors(darkMode).text5}}>
+                <TableRow key={row.index} style={{borderColor: colors(darkMode).text5}}>
+                  <TableCell component="th" scope="row" style={tableStyle} align="left">
+                    {row.index}
+                  </TableCell>
                   <TableCell component="th" scope="row" style={tableStyle}>
                     {
                       <Button style={ { textTransform : 'none', color : colors(darkMode).text1, borderColor: colors(darkMode).text5 } } onClick={() => window ? window!.open('https://www.blockchain.com/eth/address/' + row.address, '_blank')!.focus() : console.log("No window")}>
