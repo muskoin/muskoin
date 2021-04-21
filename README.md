@@ -31,21 +31,13 @@ This work is dedicated to the memory of our friend, Harambe.
   <img src="./harambe.jpg" width="500">
 </p>
 
-## Notes,
-
-Two subfolders.
-new_muskoin has the repository we're working with.
-uniswap_muskoin exists to steal code from but it is too complicated for our purposes.
-
-Currently new_muskoin does not have a working interface, it is just cosmetic.
-
-Access localhost:3000/#/Web3 (in new_muskoin/muskoin/src/pages) in order to see how to interface with the blockchain.
+## Current Deployment Addresses
 
 Rinkeby Address: `0xc21764e1E1216D1D12FFdfCf1eC2a3BC258b4162`
 
-MINTER_ROLE account: `0xC6Fa0615877c6A5d14019C1BadaDa5aABD78b314`
+Rinkeby MINTER_ROLE account: `0xC6Fa0615877c6A5d14019C1BadaDa5aABD78b314`
 
-## Development
+## Local Development
 
 ### Install Dependencies
 
@@ -63,25 +55,13 @@ yarn start
 
 ```bash
 yarn build
-# or
+# or working in jupyter environment with reverse proxy
 yarn build-jupyter
 # then
 yarn serve -n -s build
 ```
 
-### TO run a dev chain
-
-Using a geth node you can run:
-```bash
-geth --http --dev --nousb
-```
-
-Using hardhat you can run:
-```bash
-npx hardhat node
-```
-
-###  STEPS TO SET UP A LOCAL MUSKOIN DEPLOYMENT
+###  Steps to set up local Muskoin deployment
 
 ```bash
 npx hardhat node
@@ -96,3 +76,15 @@ Then copy deploy-contracts address into web3-data and mint/index
 ```bash
 yarn start
 ```
+
+### Running tests
+
+```bash
+npx hardhat test
+```
+
+## TODO
+- fix favicon in dApp
+- Github Pages
+- Assets for user orientation
+- Lazy minting

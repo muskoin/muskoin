@@ -16,7 +16,7 @@ export default function Meme() {
   const [memeURL, changeMemeURL] = useState('')
   const [walletAddress, changeWalletAddress] = useState('')
 
-  const muskURLString = (memeURL.length > 0 && walletAddress.length > 0) ? 'localhost:3000/#/mint/' + memeURL.replace('/','%2F') + '/' + walletAddress : ''
+  const muskURLString = (memeURL.length > 0 && walletAddress.length > 0) ? 'muskoin.app/#/mint/' + memeURL.replace('/','%2F') + '/' + walletAddress : ''
   
   return (
     <>
