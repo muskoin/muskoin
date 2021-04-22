@@ -60,12 +60,12 @@ export default function Mint() {
         console.log(tx)
         const tx_receipt = await tx.wait()
         console.log(tx_receipt)
-        addToast("You successfully minted " + memeURL , {appearance: 'success'})
+        addToast("You successfully minted " + memeURL , {appearance: 'success', autoDismiss: true})
       } catch(error) {
-        addToast(error.message, {appearance: 'error'})
+        addToast(error.message, {appearance: 'error', autoDismiss: true})
       }
     } else {
-      addToast("Input a valid URL, address, and connect to a wallet (like Metamask).", {appearance: 'error'})
+      addToast("Input a valid URL, address, and connect to a wallet (like Metamask).", {appearance: 'error', autoDismiss: true})
     }
   }
 

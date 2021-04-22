@@ -22,6 +22,10 @@ const ContainerRow = styled.div<{ error: boolean }>`
   transition: border-color 300ms ${({ error }) => (error ? 'step-end' : 'step-start')},
     color 500ms ${({ error }) => (error ? 'step-end' : 'step-start')};
   background-color: ${({ theme }) => theme.bg1};
+  &:hover {
+    background-color: ${({ theme }) => theme.bg2};
+  }
+
 `
 
 const InputContainer = styled.div`
@@ -29,13 +33,12 @@ const InputContainer = styled.div`
   padding: 1rem;
 `
 
-const CopyableLink = styled.input<{ error?: boolean }>`
+const CopyableLink = styled.p<{ error?: boolean }>`
   font-size: 1.25rem;
   outline: none;
   border: none;
   flex: 1 1 auto;
   width: 0;
-  background-color: ${({ theme }) => theme.bg1};
   transition: color 300ms ${({ error }) => (error ? 'step-end' : 'step-start')};
   color: ${({ error, theme }) => (error ? theme.red1 : theme.primary1)};
   overflow: hidden;
@@ -62,6 +65,10 @@ const CopyableLink = styled.input<{ error?: boolean }>`
 
   ::placeholder {
     color: ${({ theme }) => theme.text4};
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.bg2};
   }
 `
 
@@ -92,18 +99,9 @@ export default function URLCopyPanel({
                 {title}
               </TYPE.black>
             </RowBetween>
-            <CopyableLink
-              className="url-copy-panel"
-              type="text"
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              placeholder={placeholder}
-              error={false}
-              pattern="^(0x[a-fA-F0-9]{40})$"
-              value={value}
-            />
+            <CopyableLink>
+              {value != '' ? value : placeholder}
+            </CopyableLink>
           </AutoColumn>
         </InputContainer>
       </ContainerRow>
