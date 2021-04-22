@@ -10,14 +10,21 @@ import MemeHeader from '../../components/meme/MemeHeader'
 
 import AppBody from '../AppBody'
 import URLCopyPanel from '../../components/URLCopyPanel'
+import { useToasts } from 'react-toast-notifications';
 
 export default function Meme() {
 
   const [memeURL, changeMemeURL] = useState('')
   const [walletAddress, changeWalletAddress] = useState('')
+  const { addToast } = useToasts()
 
-  const muskURLString = (memeURL.length > 0 && walletAddress.length > 0) ? 'muskoin.app/#/mint/' + memeURL.replace('/','%2F') + '/' + walletAddress : ''
+  const muskURLString = (memeURL.length > 0 && walletAddress.length > 0) ? 'muskoin.app/#/mint/' + memeURL.replaceAll('/','%2F') + '/' + walletAddress : ''
   
+  function click2copy() {
+    muskURLString ? navigator.clipboard.writeText(muskURLString) : addToast("Enter a meme URL and your wallet address.", {appearance: 'info', autoDismiss: true})
+    muskURLString ? addToast("URL copied to clipboard. Tweet it to Elon along with your meme.", {appearance: 'success', autoDismiss: true}) : console.log("Congratulations, you did nothing.")
+  }
+
   return (
     <>
       <MintMemeMemelordsTabs active={'meme'} />
@@ -37,13 +44,13 @@ export default function Meme() {
               id="muskovite-input-panel"
               value={walletAddress}
             />
-            <BottomGrouping>
-              <URLCopyPanel
-                placeholder={''}
-                id={'custom-url-panel'}
-                title={'Elon\'s convenience URL (copy and send to Elon)'}
-                value={muskURLString}
-              />
+            <BottomGrouping onClick={click2copy}>
+                <URLCopyPanel
+                  placeholder={''}
+                  id={'custom-url-panel'}
+                  title={'Convenience URL (click to copy, then you send to Elon)'}
+                  value={muskURLString}
+                />
             </BottomGrouping>
           </AutoColumn>
         </Wrapper>
