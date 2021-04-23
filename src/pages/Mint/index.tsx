@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ButtonLight } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 import MemeURLInputPanel from '../../components/MemeURLInputPanel'
@@ -41,14 +41,24 @@ export default function Mint() {
 
   // State update functions
   const updateTokenName = async () => {
-    let tempTokenName = muskoin ? await muskoin.name() : console.log(muskoin)
-    tempTokenName ? setTokenName(tempTokenName) : console.log(tempTokenName)
+    try {
+      let tempTokenName = muskoin ? await muskoin.name() : console.log(muskoin)
+      tempTokenName ? setTokenName(tempTokenName) : console.log(tempTokenName)  
+    } catch(err) {
+      setTokenName('')
+      console.log("Can't update token name in Mint/index.tsx... probably no Metamask connected.")
+    }
   }
 
   const updateAccount = async () => {
-    let signer = Object.keys(provider).length > 0 ? await provider.getSigner() : console.log(provider)
-    let new_account = signer ? await signer.getAddress() : console.log(signer)
-    new_account ? setAccount(new_account) : console.log(new_account)
+    try {
+      let signer = Object.keys(provider).length > 0 ? await provider.getSigner() : console.log(provider)
+      let new_account = signer ? await signer.getAddress() : console.log(signer)
+      new_account ? setAccount(new_account) : console.log(new_account)  
+    } catch(err) {
+      setAccount('')
+      console.log("Can't get account in Mint/index.tsx... probably no Metamask connected.")
+    }
   }
 
   // Minting function
@@ -73,10 +83,49 @@ export default function Mint() {
   const muskoin =  Object.keys(provider).length > 0 ? new ethers.Contract(MUSKOIN_ADDRESS, MUSKOIN_INTERFACE.abi, provider.getSigner()) : console.log("Empty provider")
 
   // Initialize state
-  if(provider.anyNetwork) {
-    updateAccount()
-    updateTokenName()  
+  updateAccount()
+  updateTokenName()  
+
+  // To redirect the user to install Metamask
+  const openInNewTab = (url : string) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  } 
+
+  // Connect wallet
+  const connectWallet = () => {
+    window.ethereum ? window.ethereum.enable() : console.log("Error in Mint/index.tsx. Probably no Metamask.")
   }
+
+  /*
+  // FOR SOME REASON THIS FAILS.  FFFFF
+  try {
+    window.ethereum && window.ethereum.on ? window.ethereum.on('accountsChanged', (accounts : string[]) => {
+      console.log(accounts)
+      updateAccount()
+      console.log("CONNECT")
+    }) : console.log("FAILED .on")
+  } catch(err) {
+    console.log(err)
+  }
+  */
+
+  // Update account every 1/2 second.  TODO: Would rather be event based but cannot figure it out.
+  const updatePeriod = 500 //milliseconds
+  const updateFunction = () => {
+    if(Object.keys(provider).length > 0) {
+      updateAccount()
+      updateTokenName()
+    }  
+  }
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateFunction()
+    }, updatePeriod)
+    return () => clearInterval(interval)
+  }, [])
+  
 
   return (
     <>
@@ -98,8 +147,14 @@ export default function Mint() {
               value={walletAddress}
             />
             <BottomGrouping>
-              {!provider ? (
-                <ButtonLight onClick={() => console.log("TODO: Handle button press.")}>Connect Wallet</ButtonLight>
+              { !window || !window.ethereum || typeof window.ethereum == 'undefined' ? (          
+                <ButtonLight onClick={() => openInNewTab('https://metamask.io/')}>
+                  <h1>Install Metamask</h1>
+                </ButtonLight>
+              ) : !account || account.length == 0 ? (
+                <ButtonLight onClick={connectWallet}>
+                  <h1>Connect Wallet</h1>
+                </ButtonLight>
               ) : (
                 <ButtonLight
                   onClick={() => {

@@ -12,6 +12,7 @@ interface Window {
     on?: (...args: any[]) => void
     removeListener?: (...args: any[]) => void
     autoRefreshOnNetworkChange?: boolean
+    enable: () => boolean
   }
   web3?: {}
   clipboardData?: {}
