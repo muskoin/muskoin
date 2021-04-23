@@ -97,7 +97,7 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://muskoin.ceo/">
+          <MenuItem id="link" href="http://muskoin.ceo">
             <Info size={14} />
             About
           </MenuItem>
