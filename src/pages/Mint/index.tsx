@@ -135,7 +135,7 @@ export default function Mint() {
         <Wrapper id="mint-page">
           <AutoColumn gap={'md'}>
             <MemeURLInputPanel
-              label={'Meme URL'}
+              label={'Meme to mint'}
               onUserInput={changeMemeURL}
               id="memeurl-input-panel"
               value={memeURL}

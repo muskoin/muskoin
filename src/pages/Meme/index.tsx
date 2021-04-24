@@ -33,7 +33,7 @@ export default function Meme() {
         <Wrapper id="mint-page">
           <AutoColumn gap={'md'}>
             <MemeURLInputPanel
-              label={'Your meme URL here'}
+              label={'Type your meme URL here'}
               onUserInput={changeMemeURL}
               id="memeurl-input-panel"
               value={memeURL}
