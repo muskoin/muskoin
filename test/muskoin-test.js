@@ -82,10 +82,10 @@ describe('Deploy-lazy-mint', function() {
     var hash = ethers.utils.solidityKeccak256(
         ["address", "string"],
         [owner.address, "www.google.com"]
-    ).toString('hex');
+    );
       
     const sig = await addr1.signMessage(ethers.utils.arrayify(hash));
-    const fakesig = await addr1.signMessage(ethers.utils.arrayify(hash));
+    const fakesig = await owner.signMessage(ethers.utils.arrayify(hash));
       
     try {
         const gg = await muskoin.lazyMemeAward(owner.address, 'www.google.com', sig)
