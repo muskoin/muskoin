@@ -81,16 +81,17 @@ describe('Deploy-lazy-mint', function() {
     
     var hash = ethers.utils.solidityKeccak256(
         ["address", "string"],
-        [owner.address, "www.google.com"]
-    );
+        [owner.address, 'https://twitter.com/Muskrat42069/status/1383964827626864642']
+    ).toString('hex');
       
     const sig = await addr1.signMessage(ethers.utils.arrayify(hash));
     const fakesig = await owner.signMessage(ethers.utils.arrayify(hash));
       
     try {
-        const gg = await muskoin.lazyMemeAward(owner.address, 'www.google.com', sig)
+        const gg = await muskoin.lazyMemeAward(owner.address, 'https://twitter.com/Muskrat42069/status/1383964827626864642', sig)
         const gg_reciept = await gg.wait()
         console.log("owner minted with addr1 signature")
+        console.log("Gas Used:", gg_reciept.gasUsed.toString())
     } catch {
         console.log("owner address prevented from lazy mint")
     }
