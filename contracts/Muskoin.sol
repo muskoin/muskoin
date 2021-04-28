@@ -22,7 +22,7 @@ contract Muskoin is IERC721Enumerable, ERC721, AccessControl {
     // Create a role identifier for the minter admin role
     bytes32 public constant MINTER_ADMIN_ROLE = keccak256("MINTER_ADMIN_ROLE");
 
-    // Optional mapping from token URIs to index
+    // Inverse mapping from token URIs to index
     mapping (string => uint256) private _URIsToIndex;
     
     // Muskoin contructor sets the name and ticker
