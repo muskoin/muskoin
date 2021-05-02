@@ -11,7 +11,7 @@ async function main() {
   //const provider = new hre.ethers.providers.JsonRpcProvider("http://127.0.0.1:8545")
   const provider = new hre.ethers.providers.getDefaultProvider(network='rinkeby')
   // TODO: Uncomment this next line and put the Rinkeby address you'd like to use.  We can't share ours.
-  //const wallet = new hre.ethers.Wallet('', provider)
+  const wallet = new hre.ethers.Wallet('c4ed844d949fcca4419ca2d2fab63028fd67fd57c04b53e83970a0ccaf866658', provider)
   
   const current_block = await provider.getBlock("latest")
   
@@ -19,7 +19,7 @@ async function main() {
   const Muskoin = await hre.ethers.getContractFactory('Muskoin',signer=wallet)
   const muskoin = await Muskoin.deploy(wallet.address)
   
-  await muskoin.deployed()
+  const muskoin_receipt = await muskoin.deployTransaction.wait()
   
   console.log('wallet address:', wallet.address)
   console.log('wallet balance:', await wallet.getBalance())
@@ -27,6 +27,7 @@ async function main() {
   console.log('Factory Signer:', await Muskoin.signer.address)
   console.log('Current Block:', await current_block.number)
   console.log('Muskoin deployed to:', muskoin.address)
+  console.log('Gas Used:', console.log('Gas Used:', muskoin_receipt.gasUsed.toString()))
 }
 
 // We recommend this pattern to be able to use async/await everywhere

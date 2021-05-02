@@ -20,9 +20,10 @@ async function main() {
   const Muskoin = await hre.ethers.getContractFactory('Muskoin')
   const muskoin = await Muskoin.deploy(owner.address)
 
-  await muskoin.deployed()
+  const muskoin_receipt = await muskoin.deployTransaction.wait()
 
   console.log('Muskoin deployed to:', muskoin.address)
+  console.log('Gas Used:', muskoin_receipt.gasUsed.toString())
 }
 
 // We recommend this pattern to be able to use async/await everywhere
