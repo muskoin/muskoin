@@ -34,7 +34,7 @@ This work is dedicated to the memory of our friend, Harambe.
 
 ## Current Deployment Addresses
 
-Rinkeby Address: `0xc21764e1E1216D1D12FFdfCf1eC2a3BC258b4162`
+Rinkeby Address: `0x610bac3AAd8Fb9Db35c6e8F663239938a7CFF33c`
 
 Rinkeby MINTER_ROLE account: `0xC6Fa0615877c6A5d14019C1BadaDa5aABD78b314`
 

@@ -27,7 +27,7 @@ describe('Deploy-mint-amount', function() {
 
     const gg = await muskoin.memeAward(addr1.address, 'www.google.com')
     const gg_reciept = await gg.wait()
-
+    
     expect(await muskoin.balanceOf(addr1.address)).to.equal(1)
     expect(await muskoin.totalSupply()).to.equal(1)
     expect(await muskoin.tokenURI(muskoin.tokenByIndex(0))).to.equal('www.google.com')
@@ -69,5 +69,52 @@ describe('Deploy-mint-renounce', function() {
     expect(await muskoin.hasRole(muskoin.MINTER_ADMIN_ROLE(), owner.address)).to.equal(false)    
     expect(await muskoin.hasRole(muskoin.MINTER_ROLE(), owner.address)).to.equal(false)
 
+  })
+})
+
+describe('Deploy-lazy-mint', function() {
+  it('Should deploy Muskoin and lazily mint a token', async function() {
+    const [owner, addr1] = await ethers.getSigners()
+
+    const Muskoin = await ethers.getContractFactory('Muskoin')
+    const muskoin = await Muskoin.deploy(addr1.address)
+    
+    var hash = ethers.utils.solidityKeccak256(
+        ["address", "string"],
+        [owner.address, 'https://twitter.com/Muskrat42069/status/1383964827626864642']
+    ).toString('hex');
+      
+    const sig = await addr1.signMessage(ethers.utils.arrayify(hash));
+    const fakesig = await owner.signMessage(ethers.utils.arrayify(hash));
+      
+    try {
+        const gg = await muskoin.lazyMemeAward(owner.address, 'https://twitter.com/Muskrat42069/status/1383964827626864642', sig)
+        const gg_reciept = await gg.wait()
+        console.log("owner minted with addr1 signature")
+        console.log("Gas Used:", gg_reciept.gasUsed.toString())
+    } catch {
+        console.log("owner address prevented from lazy mint")
+    }
+    
+    try {
+        const gg2 = await muskoin.lazyMemeAward(owner.address, 'www.google.com', sig)
+        const gg2_reciept = await gg.wait()
+    } catch {
+        console.log("redundant mint prevented")
+    }
+      
+    try {
+        const gg3 = await muskoin.lazyMemeAward(owner.address, 'www.google.com', fakesig)
+        const gg3_reciept = await gg.wait()
+    } catch {
+        console.log("address 1 prevented from lazy mint")
+    }
+      
+    try{
+        const gg4 = await muskoin.memeAward(owner.address, 'www.google.com')
+        const gg4_reciept = await gg.wait()
+    } catch {
+        console.log("owner prevented from explicit mint")
+    }
   })
 })

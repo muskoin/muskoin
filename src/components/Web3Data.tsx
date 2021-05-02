@@ -18,7 +18,7 @@ export default function Web3Data() {
     const [provider, setWeb3Provider] = useWeb3ProviderManager()
     
     // this needs to be set to the address that Muskoin.sol is deployed to
-    const MUSKOIN_ADDRESS = '0xc21764e1E1216D1D12FFdfCf1eC2a3BC258b4162'
+    const MUSKOIN_ADDRESS = '0x610bac3AAd8Fb9Db35c6e8F663239938a7CFF33c'
     
     // create the muskoin interface
     const muskoin =  Object.keys(provider).length > 0 ? new ethers.Contract(MUSKOIN_ADDRESS, MUSKOIN_INTERFACE.abi, provider) : null
