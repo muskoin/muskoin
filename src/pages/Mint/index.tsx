@@ -14,11 +14,8 @@ import { ethers } from "ethers"
 import { useToasts } from 'react-toast-notifications';
 
 import MUSKOIN_INTERFACE from '../../constants/abis/Muskoin.json'
-import ReactGA from 'react-ga'
 
-ReactGA.pageview(window.location.pathname + window.location.search);
-
-const MUSKOIN_ADDRESS = '0x610bac3AAd8Fb9Db35c6e8F663239938a7CFF33c'
+const MUSKOIN_ADDRESS = '0xCe3c6AA40776b79E0cd127aCebB9c431a3F1C09a'
     
 export default function Mint() {
   const loadedUrlParams = useParsedQueryString()
