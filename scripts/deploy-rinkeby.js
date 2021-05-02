@@ -11,6 +11,7 @@ async function main() {
   //const provider = new hre.ethers.providers.JsonRpcProvider("http://127.0.0.1:8545")
   const provider = new hre.ethers.providers.getDefaultProvider(network='rinkeby')
   // TODO: Uncomment this next line and put the Rinkeby address you'd like to use.  We can't share ours.
+  
   const wallet = new hre.ethers.Wallet('', provider)
   
   const current_block = await provider.getBlock("latest")
