@@ -2,6 +2,9 @@ import { ethers } from "ethers"
 import Web3Data from '../../components/Web3Data';
 import { useWeb3ProviderManager } from '../../hooks' 
 import * as React from "react";
+import ReactGA from 'react-ga'
+
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 export default function Web3() {
     // Make sure an ethereum provider is present, or set to null if not

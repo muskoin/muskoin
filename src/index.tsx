@@ -8,6 +8,9 @@ import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import { ToastProvider } from 'react-toast-notifications'
 import store from './state'
 import './index.css'
+import ReactGA from 'react-ga'
+
+ReactGA.initialize('G-4GZ83JZGK7')
 
 ReactDOM.render(
   <React.StrictMode>

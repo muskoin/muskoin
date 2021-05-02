@@ -20,6 +20,9 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRightOutlined'
 import { colors } from '../../theme'
 import MUSKOIN_INTERFACE from '../../constants/abis/Muskoin.json'
+import ReactGA from 'react-ga'
+
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 // this needs to be set to the address that Muskoin.sol is deployed to
 const MUSKOIN_ADDRESS = '0x610bac3AAd8Fb9Db35c6e8F663239938a7CFF33c'

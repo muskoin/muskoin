@@ -11,6 +11,9 @@ import MemeHeader from '../../components/meme/MemeHeader'
 import AppBody from '../AppBody'
 import URLCopyPanel from '../../components/URLCopyPanel'
 import { useToasts } from 'react-toast-notifications';
+import ReactGA from 'react-ga'
+
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 export default function Meme() {
 
