@@ -8,6 +8,10 @@ An ultra-minimal, open source interface and protocol for bestowing eternal glory
 
 ## Current Deployment Addresses
 
+Mainnet Contract Address: `0xCe3c6AA40776b79E0cd127aCebB9c431a3F1C09a`
+
+Mainnet MINTER_ROLE Address: `0xE936e8FAf4A5655469182A49a505055B71C17604`
+
 Rinkeby Address: `0x610bac3AAd8Fb9Db35c6e8F663239938a7CFF33c`
 
 Rinkeby MINTER_ROLE account: `0xC6Fa0615877c6A5d14019C1BadaDa5aABD78b314`
