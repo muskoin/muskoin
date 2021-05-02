@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import './App.css';
+import './App.css'
+import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import Header from '../components/Header'
 import Mint from './Mint'
 import Meme from './Meme'
@@ -44,22 +45,25 @@ const BodyWrapper = styled.div`
 function App() {
 
   return (
-    <AppWrapper>
-      <HeaderWrapper>
-        <Header />
-      </HeaderWrapper>
-      <BodyWrapper>
-        <Switch>
-          <Route exact strict path="/mint" component={Mint} />
-          <Route exact strict path="/mint/:memeURL" component={RedirectToMint} />
-          <Route exact strict path="/mint/:memeURL/:walletAddress" component={RedirectToMint} />
-          <Route exact strict path="/meme" component={Meme} />
-          <Route exact strict path="/memelords" component={Memelords} />
-          <Route exact strict path="/web3" component={Web3} />
-          <Route component={RedirectPathToMintOnly} />
-        </Switch>
-      </BodyWrapper>
-    </AppWrapper>
+    <>
+      <Route component={GoogleAnalyticsReporter} />
+      <AppWrapper>
+        <HeaderWrapper>
+          <Header />
+        </HeaderWrapper>
+        <BodyWrapper>
+          <Switch>
+            <Route exact strict path="/mint" component={Mint} />
+            <Route exact strict path="/mint/:memeURL" component={RedirectToMint} />
+            <Route exact strict path="/mint/:memeURL/:walletAddress" component={RedirectToMint} />
+            <Route exact strict path="/meme" component={Meme} />
+            <Route exact strict path="/memelords" component={Memelords} />
+            <Route exact strict path="/web3" component={Web3} />
+            <Route component={RedirectPathToMintOnly} />
+          </Switch>
+        </BodyWrapper>
+      </AppWrapper>
+    </>
   );
 }
 export default App;

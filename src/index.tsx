@@ -7,10 +7,12 @@ import App from './pages/App'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import { ToastProvider } from 'react-toast-notifications'
 import store from './state'
-import './index.css'
 import ReactGA from 'react-ga'
+import './index.css'
 
-ReactGA.initialize('G-4GZ83JZGK7')
+const GOOGLE_ANALYTICS_ID = "UA-196126021-1"
+
+ReactGA.initialize(GOOGLE_ANALYTICS_ID)
 
 ReactDOM.render(
   <React.StrictMode>
