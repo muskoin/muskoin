@@ -22,7 +22,7 @@ import { colors } from '../../theme'
 import MUSKOIN_INTERFACE from '../../constants/abis/Muskoin.json'
 
 // this needs to be set to the address that Muskoin.sol is deployed to
-const MUSKOIN_ADDRESS = '0x0EC7Cc9521C56EB6c59d6f93c2dDaF73D2DDd36f'
+const MUSKOIN_ADDRESS = '0x610bac3AAd8Fb9Db35c6e8F663239938a7CFF33c'
 
 const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({

@@ -15,7 +15,7 @@ import { useToasts } from 'react-toast-notifications';
 
 import MUSKOIN_INTERFACE from '../../constants/abis/Muskoin.json'
 
-const MUSKOIN_ADDRESS = '0x0EC7Cc9521C56EB6c59d6f93c2dDaF73D2DDd36f'
+const MUSKOIN_ADDRESS = '0x610bac3AAd8Fb9Db35c6e8F663239938a7CFF33c'
     
 export default function Mint() {
   const loadedUrlParams = useParsedQueryString()
