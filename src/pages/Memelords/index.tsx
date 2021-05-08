@@ -225,6 +225,20 @@ export default function Memelords() {
             </TableHead>
 
             <TableBody style={tableStyle}>
+              {
+                ( quantityNFT != "") ? console.log(quantityNFT) : 
+                  <TableRow key={-1} style={{borderColor: colors(darkMode).text5}}>
+                  <TableCell component="th" scope="row" style={tableStyle} align="left">
+                    ...
+                  </TableCell>
+                  <TableCell component="th" scope="row" style={tableStyle}>
+                    Install and connect Metamask to read awards from ETH chain.
+                  </TableCell>
+                  <TableCell align="right" style={tableStyle}>
+                    ...
+                  </TableCell>
+                </TableRow>
+              }
               {(rowsPerPage > 0
                 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : rows
